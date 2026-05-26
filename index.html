@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>AVA</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:     #E30613;
+      --red-dk:  #B80010;
+      --gray-bg: #F5F5F5;
+      --border:  #E0E0E0;
+      --text:    #212121;
+      --muted:   #757575;
+      --white:   #FFFFFF;
+      --radius:  8px;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Topbar ── */
+    .topbar {
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      height: 52px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      gap: 8px;
+    }
+    .topbar-close {
+      background: none; border: none; cursor: pointer;
+      color: #fff; padding: 8px; display: flex; align-items: center; justify-content: center;
+    }
+    .topbar-logo {
+      height: 22px;
+    }
+    .topbar-title {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    /* ── Screens ── */
+    .screen { display: none; flex-direction: column; flex: 1; }
+    .screen.active { display: flex; animation: fadeIn .2s ease; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+
+    /* ── Tramites screen ── */
+    .page-content {
+      padding: 24px 20px;
+      flex: 1;
+    }
+    .page-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .page-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Radio list ── */
+    .radio-list { display: flex; flex-direction: column; gap: 0; }
+    .radio-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .radio-item:first-child { border-top: none; }
+    .radio-circle {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid #BDBDBD;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s;
+    }
+    .radio-circle.selected { border-color: var(--red); }
+    .radio-circle.selected::after {
+      content: ''; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--red);
+    }
+    .radio-label {
+      font-size: 14px; color: var(--red); font-weight: 500;
+    }
+    .radio-label.unselectable { color: var(--text); font-weight: 400; }
+
+    /* ── Datos cliente screen ── */
+    .centered-title {
+      font-size: 22px; font-weight: 700;
+      color: var(--text); text-align: center;
+      margin-bottom: 28px; line-height: 1.3;
+    }
+
+    .outlined-field {
+      position: relative;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 14px 8px;
+      margin-bottom: 16px;
+    }
+    .outlined-field.focused { border-color: var(--red); }
+    .outlined-field label {
+      display: block;
+      font-size: 11px; color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .outlined-field input, .outlined-field select {
+      width: 100%; border: none; outline: none;
+      font-size: 15px; font-family: inherit;
+      color: var(--text); background: transparent;
+    }
+    .outlined-field select { cursor: pointer; }
+
+    /* ── Foto screen ── */
+    .foto-wrapper {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .foto-img-placeholder {
+      width: 180px; height: 120px;
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      background: var(--gray-bg);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 28px;
+      overflow: hidden;
+    }
+    .foto-img-placeholder img { width: 100%; height: 100%; object-fit: contain; }
+    .foto-title {
+      font-size: 18px; font-weight: 700;
+      color: var(--text); margin-bottom: 12px; line-height: 1.4;
+    }
+    .foto-title span { color: var(--red); }
+    .foto-hint {
+      font-size: 13px; color: var(--muted); line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 16px 20px 28px;
+      background: var(--white);
+    }
+    .footer-legal {
+      text-align: center;
+      font-size: 11px; color: var(--muted);
+      margin-top: 12px;
+    }
+    .footer-legal a { color: var(--red); text-decoration: none; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: block; width: 100%;
+      padding: 14px; border: none; border-radius: 24px;
+      font-family: inherit; font-size: 15px; font-weight: 500;
+      cursor: pointer; transition: background .2s, transform .08s;
+      text-align: center;
+    }
+    .btn:active { transform: scale(.98); }
+    .btn-primary { background: var(--red); color: #fff; }
+    .btn-primary:hover { background: var(--red-dk); }
+    .btn-primary:disabled { background: #BDBDBD; cursor: not-allowed; }
+
+    /* ── DNI preview box ── */
+    .dni-preview {
+      width: 100%; max-width: 260px;
+      height: 160px;
+      background: #F0F0F0;
+      border-radius: 12px;
+      margin: 0 auto 24px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .dni-preview svg { opacity: .35; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════ SCREEN 1: Selección de trámite ══════════ -->
+  <div id="s1" class="screen active">
+    <div class="topbar">
+      <button class="topbar-close" onclick="closeAva()">
+        <!-- X icon -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <!-- Logo Claro texto SVG inline -->
+      <svg class="topbar-logo" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
+        <circle cx="72" cy="8" r="5" fill="white" opacity=".9"/>
+      </svg>
+    </div>
+
+    <div class="page-content">
+      <p class="page-title">Trámites</p>
+      <p class="page-subtitle">Seleccioná el tipo de trámite</p>
+
+      <div class="radio-list" id="tramiteList">
+        <div class="radio-item" onclick="selectTramite(this, 'Activación móvil NO presencial')">
+          <div class="radio-circle"></div>
+          <span class="radio-label">Activación móvil NO presencial</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Activación de nueva línea')">
+          <div class="radio-circle"></div>
+          <span class="radio-label">Activación de nueva línea</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Activación fija')">
+          <div class="radio-circle"></div>
+          <span class="radio-label unselectable">Activación fija</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Alta de seguro')">
+          <div class="radio-circle"></div>
+          <span class="radio-label unselectable">Alta de seguro</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Cambio de SIM')">
+          <div class="radio-circle"></div>
+          <span class="radio-label unselectable">Cambio de SIM</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Cambio de terminal')">
+          <div class="radio-circle"></div>
+          <span class="radio-label unselectable">Cambio de terminal</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Portabilidad')">
+          <div class="radio-circle"></div>
+          <span class="radio-label unselectable">Portabilidad</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Portabilidad NO presencial')">
+          <div class="radio-circle"></div>
+          <span class="radio-label unselectable">Portabilidad NO presencial</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Servicio técnico')">
+          <div class="radio-circle"></div>
+          <span class="radio-label unselectable">Servicio técnico</span>
+        </div>
+        <div class="radio-item" onclick="selectTramite(this, 'Validación de trámite postventa')">
+          <div class="radio-circle"></div>
+          <span class="radio-label unselectable">Validación de trámite postventa</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button class="btn btn-primary" id="btnContinuar1" disabled onclick="goToS2()">Continuar</button>
+    </div>
+  </div>
+
+  <!-- ══════════ SCREEN 2: Datos del cliente ══════════ -->
+  <div id="s2" class="screen">
+    <div class="topbar">
+      <button class="topbar-close" onclick="closeAva()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <svg class="topbar-logo" viewBox="0 0 80 28" fill="none">
+        <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
+        <circle cx="72" cy="8" r="5" fill="white" opacity=".9"/>
+      </svg>
+    </div>
+
+    <div class="page-content">
+      <p class="centered-title">Ingresá los datos del<br/>cliente</p>
+
+      <div class="outlined-field">
+        <label>Tipo de documento</label>
+        <select id="tipoDoc">
+          <option>DNI</option>
+          <option>CUIL</option>
+          <option>Pasaporte</option>
+        </select>
+      </div>
+
+      <div class="outlined-field" id="nroDocField">
+        <label>Número del documento</label>
+        <input type="number" id="nroDoc" placeholder="" inputmode="numeric"
+               oninput="checkDniField()" />
+      </div>
+    </div>
+
+    <div class="footer">
+      <button class="btn btn-primary" id="btnContinuar2" disabled onclick="goToS3()">Continuar</button>
+    </div>
+  </div>
+
+  <!-- ══════════ SCREEN 3: Foto FRENTE ══════════ -->
+  <div id="s3" class="screen">
+    <div class="topbar">
+      <button class="topbar-close" onclick="closeAva()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <span class="topbar-title" id="topbarTitleS3">AVA - Portabilidad Móvil</span>
+    </div>
+
+    <div style="text-align:center; padding: 12px 20px 0; font-size:14px; color:#757575;">
+      Validá tu identidad
+    </div>
+
+    <div class="foto-wrapper">
+      <div class="dni-preview">
+        <!-- DNI frente placeholder -->
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
+          <rect x="4" y="4" width="112" height="72" rx="6" fill="#E0E0E0"/>
+          <rect x="12" y="14" width="30" height="38" rx="3" fill="#BDBDBD"/>
+          <rect x="52" y="16" width="56" height="6" rx="2" fill="#BDBDBD"/>
+          <rect x="52" y="28" width="40" height="5" rx="2" fill="#BDBDBD"/>
+          <rect x="52" y="38" width="48" height="5" rx="2" fill="#BDBDBD"/>
+          <rect x="12" y="58" width="96" height="4" rx="2" fill="#BDBDBD"/>
+        </svg>
+      </div>
+      <p class="foto-title">Sacá foto del <span>FRENTE</span><br/>del documento</p>
+      <p class="foto-hint">Te recomendamos que apoyes el<br/>documento en un fondo oscuro<br/>y no uses flash.</p>
+    </div>
+
+    <div class="footer">
+      <button class="btn btn-primary" onclick="goToS4()">Continuar</button>
+      <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/>
+        <a href="#">Legal y Regulatorio</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ══════════ SCREEN 4: Foto DORSO ══════════ -->
+  <div id="s4" class="screen">
+    <div class="topbar">
+      <button class="topbar-close" onclick="closeAva()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+      <span class="topbar-title" id="topbarTitleS4">AVA - Portabilidad Móvil</span>
+    </div>
+
+    <div style="text-align:center; padding: 12px 20px 0; font-size:14px; color:#757575;">
+      Validá tu identidad
+    </div>
+
+    <div class="foto-wrapper">
+      <div class="dni-preview">
+        <!-- DNI dorso placeholder -->
+        <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
+          <rect x="4" y="4" width="112" height="72" rx="6" fill="#E0E0E0"/>
+          <rect x="12" y="12" width="96" height="8" rx="2" fill="#BDBDBD"/>
+          <rect x="12" y="26" width="60" height="5" rx="2" fill="#BDBDBD"/>
+          <rect x="12" y="36" width="80" height="5" rx="2" fill="#BDBDBD"/>
+          <rect x="12" y="46" width="50" height="5" rx="2" fill="#BDBDBD"/>
+          <rect x="12" y="58" width="96" height="4" rx="2" fill="#BDBDBD"/>
+        </svg>
+      </div>
+      <p class="foto-title">Sacá foto del <span>DORSO</span><br/>del documento</p>
+      <p class="foto-hint">Te recomendamos que apoyes el<br/>documento en un fondo oscuro<br/>y no uses flash.</p>
+    </div>
+
+    <div class="footer">
+      <button class="btn btn-primary" onclick="finishAva()">Continuar</button>
+      <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/>
+        <a href="#">Legal y Regulatorio</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    var selectedTramite = '';
+
+    function goTo(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function selectTramite(el, name) {
+      document.querySelectorAll('.radio-circle').forEach(c => c.classList.remove('selected'));
+      el.querySelector('.radio-circle').classList.add('selected');
+      selectedTramite = name;
+      document.getElementById('btnContinuar1').disabled = false;
+    }
+
+    function goToS2() {
+      if (!selectedTramite) return;
+      // Actualizar títulos de pantallas de foto
+      var title = 'AVA - ' + selectedTramite;
+      document.getElementById('topbarTitleS3').textContent = title;
+      document.getElementById('topbarTitleS4').textContent = title;
+      goTo('s2');
+    }
+
+    function checkDniField() {
+      var val = document.getElementById('nroDoc').value.trim();
+      document.getElementById('btnContinuar2').disabled = val.length < 7;
+    }
+
+    function goToS3() {
+      var val = document.getElementById('nroDoc').value.trim();
+      if (val.length < 7) return;
+      goTo('s3');
+    }
+
+    function goToS4() { goTo('s4'); }
+
+    function finishAva() {
+      try {
+        Android.onAvaCompleted();
+      } catch(e) {
+        window.location.href = 'nexo.html';
+      }
+    }
+
+    function closeAva() {
+      try {
+        Android.onCloseWebView();
+      } catch(e) {
+        history.back();
+      }
+    }
+
+    // Expuesto para que Android pueda llamarlo y obtener el visitId si lo necesita
+    function getVisitIdFromAndroid() {
+      try {
+        return Android.getVisitId();
+      } catch(e) {
+        return '';
+      }
+    }
+  </script>
+</body>
+</html>
