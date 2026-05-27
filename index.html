@@ -17,8 +17,8 @@
       --text:    #212121;
       --muted:   #757575;
       --white:   #FFFFFF;
+      --green:   #4CAF50;
       --blue:    #2196F3;
-      --radius:  8px;
     }
 
     body {
@@ -35,6 +35,7 @@
       display: flex; align-items: center;
       padding: 0 8px; height: 52px;
       position: sticky; top: 0; z-index: 10; gap: 8px;
+      flex-shrink: 0;
     }
     .topbar-btn {
       background: none; border: none; cursor: pointer;
@@ -49,16 +50,12 @@
     .screen.active { display: flex; animation: fadeIn .2s ease; }
     @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
 
-    /* ── Page layout ── */
-    .page-content { padding: 24px 20px; flex: 1; }
-    .page-title   { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .page-subtitle{ font-size: 13px; color: var(--muted); margin-bottom: 20px; }
-
-    /* ── Footer ── */
-    .footer { padding: 16px 20px 32px; background: var(--white); }
-    .footer-legal {
-      text-align: center; font-size: 11px; color: var(--muted); margin-top: 12px;
-    }
+    /* ── Layout helpers ── */
+    .page-content  { padding: 24px 20px; flex: 1; }
+    .page-title    { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .page-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .footer        { padding: 16px 20px 32px; background: var(--white); flex-shrink: 0; }
+    .footer-legal  { text-align: center; font-size: 11px; color: var(--muted); margin-top: 12px; }
     .footer-legal a { color: var(--red); text-decoration: none; }
 
     /* ── Buttons ── */
@@ -76,7 +73,7 @@
       background: none; border: none; color: var(--red);
       font-family: inherit; font-size: 14px; font-weight: 500;
       text-decoration: underline; cursor: pointer;
-      display: block; text-align: center; padding: 8px 0;
+      display: block; text-align: center; padding: 10px 0;
     }
 
     /* ── Radio list ── */
@@ -96,25 +93,26 @@
       content: ''; width: 10px; height: 10px;
       border-radius: 50%; background: var(--red);
     }
-    .radio-label { font-size: 14px; color: var(--text); }
+    .radio-label           { font-size: 14px; color: var(--text); }
     .radio-label.highlight { color: var(--red); font-weight: 500; }
 
     /* ── Outlined field ── */
     .outlined-field {
-      border: 1.5px solid var(--border); border-radius: var(--radius);
+      border: 1.5px solid var(--border); border-radius: 8px;
       padding: 10px 14px 8px; margin-bottom: 16px;
     }
-    .outlined-field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 2px; }
-    .outlined-field input, .outlined-field select {
+    .outlined-field label  { display: block; font-size: 11px; color: var(--muted); margin-bottom: 2px; }
+    .outlined-field input,
+    .outlined-field select {
       width: 100%; border: none; outline: none;
       font-size: 15px; font-family: inherit; color: var(--text); background: transparent;
     }
 
-    /* ── Foto screen ── */
-    .foto-wrapper {
+    /* ── Foto / centrado ── */
+    .centered-wrapper {
       flex: 1; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      padding: 32px 24px; text-align: center;
+      padding: 24px 20px; text-align: center;
     }
     .dni-preview {
       width: 100%; max-width: 260px; height: 160px;
@@ -122,70 +120,20 @@
       margin: 0 auto 24px;
       display: flex; align-items: center; justify-content: center;
     }
-    .foto-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
-    .foto-title span { color: var(--red); }
-    .foto-hint { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 32px; }
+    .foto-title       { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
+    .foto-title span  { color: var(--red); }
+    .foto-hint        { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-    /* ════════════════════════════════
-       FIRMA
-    ════════════════════════════════ */
-    .firma-screen-content {
-      flex: 1; display: flex; flex-direction: column;
-      padding: 0 16px 16px;
-    }
-    .firma-title {
-      font-size: 17px; font-weight: 700; color: var(--text);
-      text-align: center; padding: 16px 0 12px;
-    }
-
-    .canvas-wrapper {
-      background: #fff;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    #signatureCanvas {
-      display: block;
-      touch-action: none;
-      width: 100%;
-      cursor: crosshair;
-    }
-    .canvas-underline {
-      height: 2px; background: var(--blue);
-      margin: 0 16px;
-    }
-
-    .reintentar-btn {
-      background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; gap: 6px;
-      color: var(--text); font-family: inherit; font-size: 13px;
-      padding: 10px 0;
-    }
-    .reintentar-btn svg { color: var(--text); }
-
-    .terms-row {
-      display: flex; align-items: flex-start; gap: 10px;
-      margin: 8px 0 20px;
-    }
-    .terms-row input[type=checkbox] {
-      width: 18px; height: 18px; flex-shrink: 0;
-      margin-top: 2px; accent-color: var(--blue); cursor: pointer;
-    }
-    .terms-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
-    .terms-text a { color: var(--blue); text-decoration: none; }
-
-    /* ── Spinner loading ── */
-    .loading-overlay {
+    /* ── Loading overlay (foto) ── */
+    .foto-loading-overlay {
       display: none;
       position: fixed; inset: 0;
-      background: rgba(0,0,0,.45);
+      background: rgba(0,0,0,.55);
       align-items: center; justify-content: center;
-      z-index: 100;
+      z-index: 50;
     }
-    .loading-overlay.visible { display: flex; }
-    .loading-box {
+    .foto-loading-overlay.visible { display: flex; }
+    .foto-loading-box {
       background: #fff; border-radius: 12px;
       padding: 28px 36px;
       display: flex; flex-direction: column; align-items: center; gap: 14px;
@@ -193,7 +141,7 @@
     }
     .spinner {
       width: 36px; height: 36px;
-      border: 3px solid #f3f3f3;
+      border: 3px solid #f0f0f0;
       border-top: 3px solid var(--red);
       border-radius: 50%;
       animation: spin .8s linear infinite;
@@ -201,59 +149,95 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .loading-text { font-size: 14px; color: var(--text); text-align: center; line-height: 1.5; }
 
-    /* ── Modal ── */
+    /* ── Validación exitosa ── */
+    .check-container {
+      position: relative; width: 100px; height: 100px;
+      margin-bottom: 28px; flex-shrink: 0;
+    }
+    .check-bg-gray {
+      position: absolute; bottom: 0; left: 0;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #BDBDBD; opacity: .5;
+    }
+    .check-circle {
+      position: absolute; top: 0; right: 0;
+      width: 74px; height: 74px; border-radius: 50%;
+      background: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(76,175,80,.35);
+      animation: popIn .4s cubic-bezier(.175,.885,.32,1.275) both;
+    }
+    @keyframes popIn { from { transform:scale(0); opacity:0; } to { transform:scale(1); opacity:1; } }
+    .success-title    { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .success-subtitle { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+    /* ── Firma ── */
+    .firma-content { flex:1; display:flex; flex-direction:column; padding: 0 16px 16px; }
+    .firma-title   { font-size:17px; font-weight:700; color:var(--text); text-align:center; padding:16px 0 12px; }
+    .canvas-wrapper {
+      background: #fff; border-radius: 8px;
+      border: 1px solid var(--border); overflow: hidden; flex-shrink: 0;
+    }
+    #signatureCanvas { display:block; touch-action:none; width:100%; cursor:crosshair; }
+    .canvas-underline { height:2px; background:var(--blue); margin: 0 16px; }
+    .reintentar-btn {
+      background:none; border:none; cursor:pointer;
+      display:flex; align-items:center; gap:6px;
+      color:var(--text); font-family:inherit; font-size:13px; padding:10px 0;
+    }
+    .terms-row {
+      display:flex; align-items:flex-start; gap:10px; margin:8px 0 20px;
+    }
+    .terms-row input[type=checkbox] {
+      width:18px; height:18px; flex-shrink:0; margin-top:2px;
+      accent-color:var(--blue); cursor:pointer;
+    }
+    .terms-text   { font-size:12px; color:var(--muted); line-height:1.5; }
+    .terms-text a { color:var(--blue); text-decoration:none; }
+
+    /* ── Firma loading overlay ── */
+    .firma-loading-overlay {
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.45);
+      align-items:center; justify-content:center; z-index:100;
+    }
+    .firma-loading-overlay.visible { display:flex; }
+
+    /* ── Modales ── */
     .modal-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,.45);
-      align-items: flex-end; justify-content: center;
-      z-index: 200;
-      padding-bottom: 0;
+      display:none; position:fixed; inset:0;
+      background:rgba(0,0,0,.45);
+      align-items:flex-end; justify-content:center; z-index:200;
     }
-    .modal-overlay.visible { display: flex; }
+    .modal-overlay.visible { display:flex; }
     .modal-box {
-      background: #fff;
-      border-radius: 16px 16px 0 0;
-      padding: 28px 24px 36px;
-      width: 100%; max-width: 480px;
-      position: relative;
-      animation: slideUp .25s ease;
+      background:#fff; border-radius:16px 16px 0 0;
+      padding:28px 24px 36px; width:100%; max-width:480px;
+      position:relative; animation:slideUp .25s ease;
     }
-    @keyframes slideUp { from { transform: translateY(100%); } to { transform: none; } }
+    @keyframes slideUp { from { transform:translateY(100%); } to { transform:none; } }
     .modal-close {
-      position: absolute; top: 14px; right: 16px;
-      background: none; border: none; cursor: pointer; color: var(--muted); font-size: 18px;
+      position:absolute; top:14px; right:16px;
+      background:none; border:none; cursor:pointer; color:var(--muted); font-size:18px;
     }
-    .modal-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .modal-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+    .modal-title    { font-size:16px; font-weight:700; color:var(--text); margin-bottom:6px; }
+    .modal-subtitle { font-size:13px; color:var(--muted); margin-bottom:20px; line-height:1.5; }
 
-    /* ── OTP input ── */
-    .otp-wrapper {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 24px 20px; text-align: center;
-    }
-    .otp-icon { margin-bottom: 20px; }
-    .otp-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-    .otp-hint  { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 28px; }
-
-    .otp-inputs {
-      display: flex; gap: 10px; justify-content: center; margin-bottom: 8px;
-    }
+    /* ── OTP ── */
+    .otp-inputs { display:flex; gap:10px; justify-content:center; margin-bottom:8px; }
     .otp-inputs input {
-      width: 44px; height: 48px;
-      border: none; border-bottom: 2px solid var(--border);
-      text-align: center; font-size: 22px; font-weight: 700;
-      font-family: inherit; color: var(--text);
-      outline: none; background: transparent;
-      transition: border-color .2s;
+      width:44px; height:48px;
+      border:none; border-bottom:2px solid var(--border);
+      text-align:center; font-size:22px; font-weight:700;
+      font-family:inherit; color:var(--text);
+      outline:none; background:transparent; transition:border-color .2s;
     }
-    .otp-inputs input:focus { border-color: var(--red); }
+    .otp-inputs input:focus { border-color:var(--red); }
   </style>
 </head>
 <body>
 
-  <!-- ══════════ S1: Selección de trámite ══════════ -->
+  <!-- ════════ S1: Selección de trámite ════════ -->
   <div id="s1" class="screen active">
     <div class="topbar">
       <button class="topbar-btn" onclick="closeAva()">
@@ -265,11 +249,10 @@
         <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
       </svg>
     </div>
-
     <div class="page-content">
       <p class="page-title">Trámites</p>
       <p class="page-subtitle">Seleccioná el tipo de trámite</p>
-      <div class="radio-list" id="tramiteList">
+      <div class="radio-list">
         <div class="radio-item" onclick="selectTramite(this,'Activación móvil NO presencial',false)">
           <div class="radio-circle"></div><span class="radio-label highlight">Activación móvil NO presencial</span>
         </div>
@@ -303,11 +286,11 @@
       </div>
     </div>
     <div class="footer">
-      <button class="btn btn-primary" id="btnContinuar1" disabled onclick="goFromS1()">Continuar</button>
+      <button class="btn btn-primary" id="btnS1" disabled onclick="goFromS1()">Continuar</button>
     </div>
   </div>
 
-  <!-- ══════════ S2: Datos del cliente ══════════ -->
+  <!-- ════════ S2: Datos del cliente ════════ -->
   <div id="s2" class="screen">
     <div class="topbar">
       <button class="topbar-btn" onclick="closeAva()">
@@ -320,7 +303,9 @@
       </svg>
     </div>
     <div class="page-content">
-      <p style="font-size:22px;font-weight:700;text-align:center;margin-bottom:28px;line-height:1.3;">Ingresá los datos del<br/>cliente</p>
+      <p style="font-size:22px;font-weight:700;text-align:center;margin-bottom:28px;line-height:1.3;">
+        Ingresá los datos del<br/>cliente
+      </p>
       <div class="outlined-field">
         <label>Tipo de documento</label>
         <select><option>DNI</option><option>CUIL</option><option>Pasaporte</option></select>
@@ -331,11 +316,11 @@
       </div>
     </div>
     <div class="footer">
-      <button class="btn btn-primary" id="btnContinuar2" disabled onclick="goTo('s3')">Continuar</button>
+      <button class="btn btn-primary" id="btnS2" disabled onclick="goTo('s3')">Continuar</button>
     </div>
   </div>
 
-  <!-- ══════════ S3: Foto FRENTE ══════════ -->
+  <!-- ════════ S3: Foto FRENTE ════════ -->
   <div id="s3" class="screen">
     <div class="topbar">
       <button class="topbar-btn" onclick="closeAva()">
@@ -345,8 +330,8 @@
       </button>
       <span class="topbar-title" id="titleS3">AVA</span>
     </div>
-    <div style="text-align:center;padding:12px 20px 0;font-size:14px;color:#757575;">Validá tu identidad</div>
-    <div class="foto-wrapper">
+    <div style="text-align:center;padding:12px 20px 0;font-size:14px;color:var(--muted);">Validá tu identidad</div>
+    <div class="centered-wrapper">
       <div class="dni-preview">
         <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
           <rect x="4" y="4" width="112" height="72" rx="6" fill="#E0E0E0"/>
@@ -361,12 +346,12 @@
       <p class="foto-hint">Te recomendamos que apoyes el<br/>documento en un fondo oscuro<br/>y no uses flash.</p>
     </div>
     <div class="footer">
-      <button class="btn btn-primary" onclick="goTo('s4')">Continuar</button>
+      <button class="btn btn-primary" onclick="simulateFotoLoad('s4')">Continuar</button>
       <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/><a href="#">Legal y Regulatorio</a></p>
     </div>
   </div>
 
-  <!-- ══════════ S4: Foto DORSO ══════════ -->
+  <!-- ════════ S4: Foto DORSO ════════ -->
   <div id="s4" class="screen">
     <div class="topbar">
       <button class="topbar-btn" onclick="closeAva()">
@@ -376,8 +361,8 @@
       </button>
       <span class="topbar-title" id="titleS4">AVA</span>
     </div>
-    <div style="text-align:center;padding:12px 20px 0;font-size:14px;color:#757575;">Validá tu identidad</div>
-    <div class="foto-wrapper">
+    <div style="text-align:center;padding:12px 20px 0;font-size:14px;color:var(--muted);">Validá tu identidad</div>
+    <div class="centered-wrapper">
       <div class="dni-preview">
         <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
           <rect x="4" y="4" width="112" height="72" rx="6" fill="#E0E0E0"/>
@@ -392,15 +377,15 @@
       <p class="foto-hint">Te recomendamos que apoyes el<br/>documento en un fondo oscuro<br/>y no uses flash.</p>
     </div>
     <div class="footer">
-      <button class="btn btn-primary" onclick="finishAva()">Continuar</button>
+      <button class="btn btn-primary" onclick="simulateFotoLoad('s5')">Continuar</button>
       <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/><a href="#">Legal y Regulatorio</a></p>
     </div>
   </div>
 
-  <!-- ══════════ S5: Firma del cliente ══════════ -->
+  <!-- ════════ S5: Validación de identidad exitosa ════════ -->
   <div id="s5" class="screen">
     <div class="topbar">
-      <button class="topbar-btn" onclick="closeAva()">
+      <button class="topbar-btn">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <polyline points="15 18 9 12 15 6"/>
         </svg>
@@ -409,36 +394,26 @@
         <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
       </svg>
     </div>
-
-    <div class="firma-screen-content">
-      <p class="firma-title">Firma del cliente</p>
-
-      <div class="canvas-wrapper">
-        <canvas id="signatureCanvas" height="220"></canvas>
+    <div class="centered-wrapper">
+      <div class="check-container">
+        <div class="check-bg-gray"></div>
+        <div class="check-circle">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none"
+               stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
       </div>
-      <div class="canvas-underline"></div>
-
-      <button class="reintentar-btn" onclick="clearCanvas()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1 4 1 10 7 10"/>
-          <path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
-        </svg>
-        Reintentar
-      </button>
-
-      <div class="terms-row">
-        <input type="checkbox" id="termsCheck" onchange="checkFirmaReady()"/>
-        <p class="terms-text">
-          He leído y acepto los <a href="#">Términos y Condiciones</a>, la <a href="#">Solicitud de Servicio</a>,
-          la <a href="#">Aceptación de Condiciones Particulares</a>, las <a href="#">Políticas Aplicables</a>.
-        </p>
-      </div>
-
-      <button class="btn btn-primary" id="btnFirmar" disabled onclick="onFirmarClick()">Continuar</button>
+      <p class="success-title">Validación de<br/>identidad exitosa</p>
+      <p class="success-subtitle" style="margin-top:8px;">Continuá con la gestión en Stealth / Nexo Stealth</p>
+    </div>
+    <div class="footer">
+      <button class="btn btn-primary" onclick="finishAva()">Continuar</button>
+      <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/><a href="#">Legal y Regulatorio</a></p>
     </div>
   </div>
 
-  <!-- ══════════ S6: Código de Portabilidad ══════════ -->
+  <!-- ════════ S6: Firma del cliente (postventa) ════════ -->
   <div id="s6" class="screen">
     <div class="topbar">
       <button class="topbar-btn" onclick="closeAva()">
@@ -450,10 +425,45 @@
         <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
       </svg>
     </div>
+    <div class="firma-content">
+      <p class="firma-title">Firma del cliente</p>
+      <div class="canvas-wrapper">
+        <canvas id="signatureCanvas" height="220"></canvas>
+      </div>
+      <div class="canvas-underline"></div>
+      <button class="reintentar-btn" onclick="clearCanvas()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+        </svg>
+        Reintentar
+      </button>
+      <div class="terms-row">
+        <input type="checkbox" id="termsCheck" onchange="checkFirmaReady()"/>
+        <p class="terms-text">
+          He leído y acepto los <a href="#">Términos y Condiciones</a>, la <a href="#">Solicitud de
+          Servicio</a>, la <a href="#">Aceptación de Condiciones Particulares</a>,
+          las <a href="#">Políticas Aplicables</a>.
+        </p>
+      </div>
+      <button class="btn btn-primary" id="btnFirmar" disabled onclick="onFirmarClick()">Continuar</button>
+    </div>
+  </div>
 
-    <div class="otp-wrapper">
-      <!-- Ícono decorativo -->
-      <div class="otp-icon">
+  <!-- ════════ S7: Código de Portabilidad ════════ -->
+  <div id="s7" class="screen">
+    <div class="topbar">
+      <button class="topbar-btn" onclick="closeAva()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <svg class="topbar-logo" viewBox="0 0 72 28" fill="none">
+        <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
+      </svg>
+    </div>
+    <div class="centered-wrapper">
+      <div style="margin-bottom:20px;">
         <svg width="100" height="80" viewBox="0 0 100 80" fill="none">
           <ellipse cx="40" cy="48" rx="28" ry="22" fill="#F5F5F5"/>
           <ellipse cx="62" cy="36" rx="22" ry="18" fill="#FFCDD2"/>
@@ -462,38 +472,43 @@
           <rect x="38" y="42" width="8" height="8" rx="2" fill="#BDBDBD"/>
           <rect x="50" y="42" width="8" height="8" rx="2" fill="#BDBDBD"/>
           <circle cx="74" cy="26" r="14" fill="#E30613"/>
-          <circle cx="74" cy="26" r="10" fill="white" opacity=".15"/>
           <polyline points="68 26 72 30 80 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
         </svg>
       </div>
-
-      <p class="otp-title">Código de Portabilidad</p>
-      <p class="otp-hint">Pedile al cliente el código que va a recibir<br/>por SMS en los próximos minutos.</p>
-
+      <p class="success-title" style="font-size:18px;">Código de Portabilidad</p>
+      <p class="success-subtitle" style="margin:10px 0 28px;">
+        Pedile al cliente el código que va a recibir<br/>por SMS en los próximos minutos.
+      </p>
       <div class="otp-inputs">
         <input type="text" maxlength="1" inputmode="numeric" class="otp-digit" oninput="otpNext(this,0)"/>
         <input type="text" maxlength="1" inputmode="numeric" class="otp-digit" oninput="otpNext(this,1)"/>
         <input type="text" maxlength="1" inputmode="numeric" class="otp-digit" oninput="otpNext(this,2)"/>
         <input type="text" maxlength="1" inputmode="numeric" class="otp-digit" oninput="otpNext(this,3)"/>
       </div>
-
-      <button class="btn-link" onclick="">Reenviar código</button>
+      <button class="btn-link" style="margin-top:8px;">Reenviar código</button>
     </div>
-
     <div class="footer">
       <button class="btn btn-primary" id="btnOtp" disabled onclick="onOtpContinuar()">Continuar</button>
     </div>
   </div>
 
-  <!-- ══════════ LOADING OVERLAY ══════════ -->
-  <div class="loading-overlay" id="loadingOverlay">
-    <div class="loading-box">
+  <!-- ════════ LOADING: procesando foto ════════ -->
+  <div class="foto-loading-overlay" id="fotoLoading">
+    <div class="foto-loading-box">
+      <div class="spinner"></div>
+      <p class="loading-text">Procesando imagen...<br/>Esperá por favor.</p>
+    </div>
+  </div>
+
+  <!-- ════════ LOADING: firmando trámite ════════ -->
+  <div class="firma-loading-overlay" id="firmaLoading">
+    <div class="foto-loading-box">
       <div class="spinner"></div>
       <p class="loading-text">Firmando trámite...<br/>Esperá por favor.</p>
     </div>
   </div>
 
-  <!-- ══════════ MODAL: Adjuntar archivos ══════════ -->
+  <!-- ════════ MODAL: Adjuntar archivos ════════ -->
   <div class="modal-overlay" id="modalAdjuntar">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal('modalAdjuntar')">✕</button>
@@ -505,7 +520,7 @@
     </div>
   </div>
 
-  <!-- ══════════ MODAL: Guardar código ══════════ -->
+  <!-- ════════ MODAL: Guardar código ════════ -->
   <div class="modal-overlay" id="modalGuardarCodigo">
     <div class="modal-box">
       <button class="modal-close" onclick="closeModal('modalGuardarCodigo')">✕</button>
@@ -518,14 +533,15 @@
   </div>
 
   <script>
-    // ── Estado global ──
-    var selectedTramite  = '';
-    var isPostventa      = false;
-    var hasSignature     = false;
+    // ─── Estado ───
+    var selectedTramite = '';
+    var isPostventa     = false;
+    var hasSignature    = false;
+    var otpValues       = ['', '', '', ''];
 
-    // ── Navegación ──
+    // ─── Navegación ───
     function goTo(id) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
       document.getElementById(id).classList.add('active');
       window.scrollTo(0, 0);
     }
@@ -534,23 +550,21 @@
       document.getElementById(id).classList.remove('visible');
     }
 
-    // ── S1: Selección de trámite ──
+    // ─── S1: Selección de trámite ───
     function selectTramite(el, name, postventa) {
-      document.querySelectorAll('.radio-circle').forEach(c => c.classList.remove('selected'));
+      document.querySelectorAll('.radio-circle').forEach(function(c) { c.classList.remove('selected'); });
       el.querySelector('.radio-circle').classList.add('selected');
       selectedTramite = name;
       isPostventa     = postventa;
-      document.getElementById('btnContinuar1').disabled = false;
+      document.getElementById('btnS1').disabled = false;
     }
 
     function goFromS1() {
       if (!selectedTramite) return;
       if (isPostventa) {
-        // Validación de trámite postventa → ir directo a firma
-        goTo('s5');
+        goTo('s6');
         initCanvas();
       } else {
-        // Resto de trámites → flujo normal con datos + fotos
         var title = 'AVA - ' + selectedTramite;
         document.getElementById('titleS3').textContent = title;
         document.getElementById('titleS4').textContent = title;
@@ -558,38 +572,45 @@
       }
     }
 
-    // ── S2: Datos del cliente ──
+    // ─── S2: DNI ───
     function checkDni() {
       var val = document.getElementById('nroDoc').value.trim();
-      document.getElementById('btnContinuar2').disabled = val.length < 7;
+      document.getElementById('btnS2').disabled = val.length < 7;
     }
 
-    // ── S4: fin de fotos → notifica AVA completado ──
+    // ─── S3/S4: Simular carga de foto con spinner ───
+    function simulateFotoLoad(nextScreen) {
+      document.getElementById('fotoLoading').classList.add('visible');
+      setTimeout(function() {
+        document.getElementById('fotoLoading').classList.remove('visible');
+        goTo(nextScreen);
+      }, 1800);
+    }
+
+    // ─── S5: AVA completado (flujo normal) ───
     function finishAva() {
       try { Android.onAvaCompleted(); } catch(e) { window.location.href = 'nexo.html'; }
     }
 
-    // ── S5: Canvas de firma ──
-    var canvas, ctx, drawing = false, lastX = 0, lastY = 0;
+    // ─── S6: Canvas de firma ───
+    var canvas, ctx, drawing = false;
 
     function initCanvas() {
       canvas = document.getElementById('signatureCanvas');
-      canvas.width = canvas.offsetWidth;
+      canvas.width = canvas.offsetWidth || window.innerWidth - 32;
       ctx = canvas.getContext('2d');
       ctx.strokeStyle = '#1a1a1a';
       ctx.lineWidth   = 2.5;
       ctx.lineCap     = 'round';
       ctx.lineJoin    = 'round';
 
-      // Touch
       canvas.addEventListener('touchstart',  onTouchStart,  { passive: false });
       canvas.addEventListener('touchmove',   onTouchMove,   { passive: false });
-      canvas.addEventListener('touchend',    onTouchEnd);
-      // Mouse (desktop / emulador)
+      canvas.addEventListener('touchend',    function() { drawing = false; });
       canvas.addEventListener('mousedown',   onMouseDown);
       canvas.addEventListener('mousemove',   onMouseMove);
-      canvas.addEventListener('mouseup',     onMouseUp);
-      canvas.addEventListener('mouseleave',  onMouseUp);
+      canvas.addEventListener('mouseup',     function() { drawing = false; });
+      canvas.addEventListener('mouseleave',  function() { drawing = false; });
     }
 
     function getPos(e) {
@@ -598,12 +619,26 @@
       return { x: src.clientX - rect.left, y: src.clientY - rect.top };
     }
 
-    function onTouchStart(e)  { e.preventDefault(); var p = getPos(e); drawing = true; lastX = p.x; lastY = p.y; ctx.beginPath(); ctx.moveTo(lastX, lastY); }
-    function onTouchMove(e)   { e.preventDefault(); if (!drawing) return; var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); lastX = p.x; lastY = p.y; hasSignature = true; checkFirmaReady(); }
-    function onTouchEnd()     { drawing = false; }
-    function onMouseDown(e)   { drawing = true; var p = getPos(e); lastX = p.x; lastY = p.y; ctx.beginPath(); ctx.moveTo(lastX, lastY); }
-    function onMouseMove(e)   { if (!drawing) return; var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); lastX = p.x; lastY = p.y; hasSignature = true; checkFirmaReady(); }
-    function onMouseUp()      { drawing = false; }
+    function onTouchStart(e) {
+      e.preventDefault();
+      drawing = true;
+      var p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y);
+    }
+    function onTouchMove(e) {
+      e.preventDefault();
+      if (!drawing) return;
+      var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke();
+      hasSignature = true; checkFirmaReady();
+    }
+    function onMouseDown(e) {
+      drawing = true;
+      var p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y);
+    }
+    function onMouseMove(e) {
+      if (!drawing) return;
+      var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke();
+      hasSignature = true; checkFirmaReady();
+    }
 
     function clearCanvas() {
       if (!canvas) return;
@@ -613,43 +648,29 @@
     }
 
     function checkFirmaReady() {
-      var checked = document.getElementById('termsCheck').checked;
-      document.getElementById('btnFirmar').disabled = !(hasSignature && checked);
+      document.getElementById('btnFirmar').disabled =
+        !(hasSignature && document.getElementById('termsCheck').checked);
     }
 
     function onFirmarClick() {
-      // Mostrar loading
-      document.getElementById('loadingOverlay').classList.add('visible');
+      document.getElementById('firmaLoading').classList.add('visible');
       setTimeout(function() {
-        document.getElementById('loadingOverlay').classList.remove('visible');
-        // Mostrar modal adjuntar
+        document.getElementById('firmaLoading').classList.remove('visible');
         document.getElementById('modalAdjuntar').classList.add('visible');
       }, 2000);
     }
 
-    function onAdjuntar() {
-      // En la versión real abriría el selector de archivos
-      closeModal('modalAdjuntar');
-      goTo('s6');
-    }
+    function onAdjuntar()            { closeModal('modalAdjuntar'); goTo('s7'); }
+    function onContinuarSinAdjuntar(){ closeModal('modalAdjuntar'); goTo('s7'); }
 
-    function onContinuarSinAdjuntar() {
-      closeModal('modalAdjuntar');
-      goTo('s6');
-    }
-
-    // ── S6: OTP ──
-    var otpDigits = ['','','',''];
-
+    // ─── S7: OTP ───
     function otpNext(input, index) {
-      otpDigits[index] = input.value;
-      // Auto-avanzar al siguiente campo
+      otpValues[index] = input.value;
       if (input.value && index < 3) {
-        var inputs = document.querySelectorAll('.otp-digit');
-        inputs[index + 1].focus();
+        document.querySelectorAll('.otp-digit')[index + 1].focus();
       }
-      var allFilled = otpDigits.every(function(d) { return d !== ''; });
-      document.getElementById('btnOtp').disabled = !allFilled;
+      document.getElementById('btnOtp').disabled =
+        !otpValues.every(function(d) { return d !== ''; });
     }
 
     function onOtpContinuar() {
@@ -658,12 +679,11 @@
 
     function onGuardarAceptar() {
       closeModal('modalGuardarCodigo');
-      // Flujo finalizado — el usuario usa el back nativo para salir
-      // Opcionalmente notificamos a Android si hace falta
-      try { Android.onAvaCompleted(); } catch(e) { /* noop */ }
+      // Flujo postventa completado → notifica a Android
+      try { Android.onProcessCompleted(); } catch(e) { /* usuario usa back nativo */ }
     }
 
-    // ── Cerrar WebView ──
+    // ─── Cerrar WebView ───
     function closeAva() {
       try { Android.onCloseWebView(); } catch(e) { history.back(); }
     }
