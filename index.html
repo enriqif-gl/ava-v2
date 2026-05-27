@@ -17,6 +17,7 @@
       --text:    #212121;
       --muted:   #757575;
       --white:   #FFFFFF;
+      --blue:    #2196F3;
       --radius:  8px;
     }
 
@@ -31,140 +32,32 @@
     /* ── Topbar ── */
     .topbar {
       background: var(--red);
-      display: flex;
-      align-items: center;
-      padding: 0 8px;
-      height: 52px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      gap: 8px;
+      display: flex; align-items: center;
+      padding: 0 8px; height: 52px;
+      position: sticky; top: 0; z-index: 10; gap: 8px;
     }
-    .topbar-close {
+    .topbar-btn {
       background: none; border: none; cursor: pointer;
-      color: #fff; padding: 8px; display: flex; align-items: center; justify-content: center;
+      color: #fff; padding: 8px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .topbar-logo {
-      height: 22px;
-    }
-    .topbar-title {
-      color: #fff;
-      font-size: 16px;
-      font-weight: 500;
-      margin-left: 4px;
-    }
+    .topbar-logo { height: 22px; }
+    .topbar-title { color: #fff; font-size: 16px; font-weight: 500; margin-left: 4px; }
 
     /* ── Screens ── */
-    .screen { display: none; flex-direction: column; flex: 1; }
+    .screen { display: none; flex-direction: column; flex: 1; min-height: calc(100vh - 52px); }
     .screen.active { display: flex; animation: fadeIn .2s ease; }
     @keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
 
-    /* ── Tramites screen ── */
-    .page-content {
-      padding: 24px 20px;
-      flex: 1;
-    }
-    .page-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .page-subtitle {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    /* ── Radio list ── */
-    .radio-list { display: flex; flex-direction: column; gap: 0; }
-    .radio-item {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-    }
-    .radio-item:first-child { border-top: none; }
-    .radio-circle {
-      width: 20px; height: 20px; border-radius: 50%;
-      border: 2px solid #BDBDBD;
-      flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      transition: border-color .2s;
-    }
-    .radio-circle.selected { border-color: var(--red); }
-    .radio-circle.selected::after {
-      content: ''; width: 10px; height: 10px;
-      border-radius: 50%; background: var(--red);
-    }
-    .radio-label {
-      font-size: 14px; color: var(--red); font-weight: 500;
-    }
-    .radio-label.unselectable { color: var(--text); font-weight: 400; }
-
-    /* ── Datos cliente screen ── */
-    .centered-title {
-      font-size: 22px; font-weight: 700;
-      color: var(--text); text-align: center;
-      margin-bottom: 28px; line-height: 1.3;
-    }
-
-    .outlined-field {
-      position: relative;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 10px 14px 8px;
-      margin-bottom: 16px;
-    }
-    .outlined-field.focused { border-color: var(--red); }
-    .outlined-field label {
-      display: block;
-      font-size: 11px; color: var(--muted);
-      margin-bottom: 2px;
-    }
-    .outlined-field input, .outlined-field select {
-      width: 100%; border: none; outline: none;
-      font-size: 15px; font-family: inherit;
-      color: var(--text); background: transparent;
-    }
-    .outlined-field select { cursor: pointer; }
-
-    /* ── Foto screen ── */
-    .foto-wrapper {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 32px 24px;
-      text-align: center;
-    }
-    .foto-img-placeholder {
-      width: 180px; height: 120px;
-      border: 2px dashed var(--border);
-      border-radius: 12px;
-      background: var(--gray-bg);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 28px;
-      overflow: hidden;
-    }
-    .foto-img-placeholder img { width: 100%; height: 100%; object-fit: contain; }
-    .foto-title {
-      font-size: 18px; font-weight: 700;
-      color: var(--text); margin-bottom: 12px; line-height: 1.4;
-    }
-    .foto-title span { color: var(--red); }
-    .foto-hint {
-      font-size: 13px; color: var(--muted); line-height: 1.6;
-      margin-bottom: 32px;
-    }
+    /* ── Page layout ── */
+    .page-content { padding: 24px 20px; flex: 1; }
+    .page-title   { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .page-subtitle{ font-size: 13px; color: var(--muted); margin-bottom: 20px; }
 
     /* ── Footer ── */
-    .footer {
-      padding: 16px 20px 28px;
-      background: var(--white);
-    }
+    .footer { padding: 16px 20px 32px; background: var(--white); }
     .footer-legal {
-      text-align: center;
-      font-size: 11px; color: var(--muted);
-      margin-top: 12px;
+      text-align: center; font-size: 11px; color: var(--muted); margin-top: 12px;
     }
     .footer-legal a { color: var(--red); text-decoration: none; }
 
@@ -173,154 +66,288 @@
       display: block; width: 100%;
       padding: 14px; border: none; border-radius: 24px;
       font-family: inherit; font-size: 15px; font-weight: 500;
-      cursor: pointer; transition: background .2s, transform .08s;
-      text-align: center;
+      cursor: pointer; transition: background .2s, transform .08s; text-align: center;
     }
     .btn:active { transform: scale(.98); }
-    .btn-primary { background: var(--red); color: #fff; }
-    .btn-primary:hover { background: var(--red-dk); }
-    .btn-primary:disabled { background: #BDBDBD; cursor: not-allowed; }
+    .btn-primary          { background: var(--red); color: #fff; }
+    .btn-primary:hover    { background: var(--red-dk); }
+    .btn-primary:disabled { background: #BDBDBD; cursor: not-allowed; transform: none; }
+    .btn-link {
+      background: none; border: none; color: var(--red);
+      font-family: inherit; font-size: 14px; font-weight: 500;
+      text-decoration: underline; cursor: pointer;
+      display: block; text-align: center; padding: 8px 0;
+    }
 
-    /* ── DNI preview box ── */
+    /* ── Radio list ── */
+    .radio-list { display: flex; flex-direction: column; }
+    .radio-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border); cursor: pointer;
+    }
+    .radio-circle {
+      width: 20px; height: 20px; border-radius: 50%;
+      border: 2px solid #BDBDBD; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s;
+    }
+    .radio-circle.selected { border-color: var(--red); }
+    .radio-circle.selected::after {
+      content: ''; width: 10px; height: 10px;
+      border-radius: 50%; background: var(--red);
+    }
+    .radio-label { font-size: 14px; color: var(--text); }
+    .radio-label.highlight { color: var(--red); font-weight: 500; }
+
+    /* ── Outlined field ── */
+    .outlined-field {
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      padding: 10px 14px 8px; margin-bottom: 16px;
+    }
+    .outlined-field label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 2px; }
+    .outlined-field input, .outlined-field select {
+      width: 100%; border: none; outline: none;
+      font-size: 15px; font-family: inherit; color: var(--text); background: transparent;
+    }
+
+    /* ── Foto screen ── */
+    .foto-wrapper {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 24px; text-align: center;
+    }
     .dni-preview {
-      width: 100%; max-width: 260px;
-      height: 160px;
-      background: #F0F0F0;
-      border-radius: 12px;
+      width: 100%; max-width: 260px; height: 160px;
+      background: #F0F0F0; border-radius: 12px;
       margin: 0 auto 24px;
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
     }
-    .dni-preview svg { opacity: .35; }
+    .foto-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px; line-height: 1.4; }
+    .foto-title span { color: var(--red); }
+    .foto-hint { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 32px; }
+
+    /* ════════════════════════════════
+       FIRMA
+    ════════════════════════════════ */
+    .firma-screen-content {
+      flex: 1; display: flex; flex-direction: column;
+      padding: 0 16px 16px;
+    }
+    .firma-title {
+      font-size: 17px; font-weight: 700; color: var(--text);
+      text-align: center; padding: 16px 0 12px;
+    }
+
+    .canvas-wrapper {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    #signatureCanvas {
+      display: block;
+      touch-action: none;
+      width: 100%;
+      cursor: crosshair;
+    }
+    .canvas-underline {
+      height: 2px; background: var(--blue);
+      margin: 0 16px;
+    }
+
+    .reintentar-btn {
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      color: var(--text); font-family: inherit; font-size: 13px;
+      padding: 10px 0;
+    }
+    .reintentar-btn svg { color: var(--text); }
+
+    .terms-row {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin: 8px 0 20px;
+    }
+    .terms-row input[type=checkbox] {
+      width: 18px; height: 18px; flex-shrink: 0;
+      margin-top: 2px; accent-color: var(--blue); cursor: pointer;
+    }
+    .terms-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .terms-text a { color: var(--blue); text-decoration: none; }
+
+    /* ── Spinner loading ── */
+    .loading-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.45);
+      align-items: center; justify-content: center;
+      z-index: 100;
+    }
+    .loading-overlay.visible { display: flex; }
+    .loading-box {
+      background: #fff; border-radius: 12px;
+      padding: 28px 36px;
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+      min-width: 220px;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid var(--red);
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-size: 14px; color: var(--text); text-align: center; line-height: 1.5; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.45);
+      align-items: flex-end; justify-content: center;
+      z-index: 200;
+      padding-bottom: 0;
+    }
+    .modal-overlay.visible { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: 16px 16px 0 0;
+      padding: 28px 24px 36px;
+      width: 100%; max-width: 480px;
+      position: relative;
+      animation: slideUp .25s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: none; } }
+    .modal-close {
+      position: absolute; top: 14px; right: 16px;
+      background: none; border: none; cursor: pointer; color: var(--muted); font-size: 18px;
+    }
+    .modal-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .modal-subtitle { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+
+    /* ── OTP input ── */
+    .otp-wrapper {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px 20px; text-align: center;
+    }
+    .otp-icon { margin-bottom: 20px; }
+    .otp-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .otp-hint  { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 28px; }
+
+    .otp-inputs {
+      display: flex; gap: 10px; justify-content: center; margin-bottom: 8px;
+    }
+    .otp-inputs input {
+      width: 44px; height: 48px;
+      border: none; border-bottom: 2px solid var(--border);
+      text-align: center; font-size: 22px; font-weight: 700;
+      font-family: inherit; color: var(--text);
+      outline: none; background: transparent;
+      transition: border-color .2s;
+    }
+    .otp-inputs input:focus { border-color: var(--red); }
   </style>
 </head>
 <body>
 
-  <!-- ══════════ SCREEN 1: Selección de trámite ══════════ -->
+  <!-- ══════════ S1: Selección de trámite ══════════ -->
   <div id="s1" class="screen active">
     <div class="topbar">
-      <button class="topbar-close" onclick="closeAva()">
-        <!-- X icon -->
+      <button class="topbar-btn" onclick="closeAva()">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <!-- Logo Claro texto SVG inline -->
-      <svg class="topbar-logo" viewBox="0 0 80 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="topbar-logo" viewBox="0 0 72 28" fill="none">
         <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
-        <circle cx="72" cy="8" r="5" fill="white" opacity=".9"/>
       </svg>
     </div>
 
     <div class="page-content">
       <p class="page-title">Trámites</p>
       <p class="page-subtitle">Seleccioná el tipo de trámite</p>
-
       <div class="radio-list" id="tramiteList">
-        <div class="radio-item" onclick="selectTramite(this, 'Activación móvil NO presencial')">
-          <div class="radio-circle"></div>
-          <span class="radio-label">Activación móvil NO presencial</span>
+        <div class="radio-item" onclick="selectTramite(this,'Activación móvil NO presencial',false)">
+          <div class="radio-circle"></div><span class="radio-label highlight">Activación móvil NO presencial</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Activación de nueva línea')">
-          <div class="radio-circle"></div>
-          <span class="radio-label">Activación de nueva línea</span>
+        <div class="radio-item" onclick="selectTramite(this,'Activación de nueva línea',false)">
+          <div class="radio-circle"></div><span class="radio-label highlight">Activación de nueva línea</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Activación fija')">
-          <div class="radio-circle"></div>
-          <span class="radio-label unselectable">Activación fija</span>
+        <div class="radio-item" onclick="selectTramite(this,'Activación fija',false)">
+          <div class="radio-circle"></div><span class="radio-label">Activación fija</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Alta de seguro')">
-          <div class="radio-circle"></div>
-          <span class="radio-label unselectable">Alta de seguro</span>
+        <div class="radio-item" onclick="selectTramite(this,'Alta de seguro',false)">
+          <div class="radio-circle"></div><span class="radio-label">Alta de seguro</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Cambio de SIM')">
-          <div class="radio-circle"></div>
-          <span class="radio-label unselectable">Cambio de SIM</span>
+        <div class="radio-item" onclick="selectTramite(this,'Cambio de SIM',false)">
+          <div class="radio-circle"></div><span class="radio-label">Cambio de SIM</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Cambio de terminal')">
-          <div class="radio-circle"></div>
-          <span class="radio-label unselectable">Cambio de terminal</span>
+        <div class="radio-item" onclick="selectTramite(this,'Cambio de terminal',false)">
+          <div class="radio-circle"></div><span class="radio-label">Cambio de terminal</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Portabilidad')">
-          <div class="radio-circle"></div>
-          <span class="radio-label unselectable">Portabilidad</span>
+        <div class="radio-item" onclick="selectTramite(this,'Portabilidad',false)">
+          <div class="radio-circle"></div><span class="radio-label">Portabilidad</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Portabilidad NO presencial')">
-          <div class="radio-circle"></div>
-          <span class="radio-label unselectable">Portabilidad NO presencial</span>
+        <div class="radio-item" onclick="selectTramite(this,'Portabilidad NO presencial',false)">
+          <div class="radio-circle"></div><span class="radio-label">Portabilidad NO presencial</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Servicio técnico')">
-          <div class="radio-circle"></div>
-          <span class="radio-label unselectable">Servicio técnico</span>
+        <div class="radio-item" onclick="selectTramite(this,'Servicio técnico',false)">
+          <div class="radio-circle"></div><span class="radio-label">Servicio técnico</span>
         </div>
-        <div class="radio-item" onclick="selectTramite(this, 'Validación de trámite postventa')">
-          <div class="radio-circle"></div>
-          <span class="radio-label unselectable">Validación de trámite postventa</span>
+        <div class="radio-item" onclick="selectTramite(this,'Validación de trámite postventa',true)">
+          <div class="radio-circle"></div><span class="radio-label">Validación de trámite postventa</span>
         </div>
       </div>
     </div>
-
     <div class="footer">
-      <button class="btn btn-primary" id="btnContinuar1" disabled onclick="goToS2()">Continuar</button>
+      <button class="btn btn-primary" id="btnContinuar1" disabled onclick="goFromS1()">Continuar</button>
     </div>
   </div>
 
-  <!-- ══════════ SCREEN 2: Datos del cliente ══════════ -->
+  <!-- ══════════ S2: Datos del cliente ══════════ -->
   <div id="s2" class="screen">
     <div class="topbar">
-      <button class="topbar-close" onclick="closeAva()">
+      <button class="topbar-btn" onclick="closeAva()">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <svg class="topbar-logo" viewBox="0 0 80 28" fill="none">
+      <svg class="topbar-logo" viewBox="0 0 72 28" fill="none">
         <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
-        <circle cx="72" cy="8" r="5" fill="white" opacity=".9"/>
       </svg>
     </div>
-
     <div class="page-content">
-      <p class="centered-title">Ingresá los datos del<br/>cliente</p>
-
+      <p style="font-size:22px;font-weight:700;text-align:center;margin-bottom:28px;line-height:1.3;">Ingresá los datos del<br/>cliente</p>
       <div class="outlined-field">
         <label>Tipo de documento</label>
-        <select id="tipoDoc">
-          <option>DNI</option>
-          <option>CUIL</option>
-          <option>Pasaporte</option>
-        </select>
+        <select><option>DNI</option><option>CUIL</option><option>Pasaporte</option></select>
       </div>
-
-      <div class="outlined-field" id="nroDocField">
+      <div class="outlined-field">
         <label>Número del documento</label>
-        <input type="number" id="nroDoc" placeholder="" inputmode="numeric"
-               oninput="checkDniField()" />
+        <input type="number" id="nroDoc" inputmode="numeric" oninput="checkDni()"/>
       </div>
     </div>
-
     <div class="footer">
-      <button class="btn btn-primary" id="btnContinuar2" disabled onclick="goToS3()">Continuar</button>
+      <button class="btn btn-primary" id="btnContinuar2" disabled onclick="goTo('s3')">Continuar</button>
     </div>
   </div>
 
-  <!-- ══════════ SCREEN 3: Foto FRENTE ══════════ -->
+  <!-- ══════════ S3: Foto FRENTE ══════════ -->
   <div id="s3" class="screen">
     <div class="topbar">
-      <button class="topbar-close" onclick="closeAva()">
+      <button class="topbar-btn" onclick="closeAva()">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <span class="topbar-title" id="topbarTitleS3">AVA - Portabilidad Móvil</span>
+      <span class="topbar-title" id="titleS3">AVA</span>
     </div>
-
-    <div style="text-align:center; padding: 12px 20px 0; font-size:14px; color:#757575;">
-      Validá tu identidad
-    </div>
-
+    <div style="text-align:center;padding:12px 20px 0;font-size:14px;color:#757575;">Validá tu identidad</div>
     <div class="foto-wrapper">
       <div class="dni-preview">
-        <!-- DNI frente placeholder -->
         <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
           <rect x="4" y="4" width="112" height="72" rx="6" fill="#E0E0E0"/>
           <rect x="12" y="14" width="30" height="38" rx="3" fill="#BDBDBD"/>
@@ -333,33 +360,25 @@
       <p class="foto-title">Sacá foto del <span>FRENTE</span><br/>del documento</p>
       <p class="foto-hint">Te recomendamos que apoyes el<br/>documento en un fondo oscuro<br/>y no uses flash.</p>
     </div>
-
     <div class="footer">
-      <button class="btn btn-primary" onclick="goToS4()">Continuar</button>
-      <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/>
-        <a href="#">Legal y Regulatorio</a>
-      </p>
+      <button class="btn btn-primary" onclick="goTo('s4')">Continuar</button>
+      <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/><a href="#">Legal y Regulatorio</a></p>
     </div>
   </div>
 
-  <!-- ══════════ SCREEN 4: Foto DORSO ══════════ -->
+  <!-- ══════════ S4: Foto DORSO ══════════ -->
   <div id="s4" class="screen">
     <div class="topbar">
-      <button class="topbar-close" onclick="closeAva()">
+      <button class="topbar-btn" onclick="closeAva()">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <span class="topbar-title" id="topbarTitleS4">AVA - Portabilidad Móvil</span>
+      <span class="topbar-title" id="titleS4">AVA</span>
     </div>
-
-    <div style="text-align:center; padding: 12px 20px 0; font-size:14px; color:#757575;">
-      Validá tu identidad
-    </div>
-
+    <div style="text-align:center;padding:12px 20px 0;font-size:14px;color:#757575;">Validá tu identidad</div>
     <div class="foto-wrapper">
       <div class="dni-preview">
-        <!-- DNI dorso placeholder -->
         <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
           <rect x="4" y="4" width="112" height="72" rx="6" fill="#E0E0E0"/>
           <rect x="12" y="12" width="96" height="8" rx="2" fill="#BDBDBD"/>
@@ -372,76 +391,281 @@
       <p class="foto-title">Sacá foto del <span>DORSO</span><br/>del documento</p>
       <p class="foto-hint">Te recomendamos que apoyes el<br/>documento en un fondo oscuro<br/>y no uses flash.</p>
     </div>
-
     <div class="footer">
       <button class="btn btn-primary" onclick="finishAva()">Continuar</button>
-      <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/>
-        <a href="#">Legal y Regulatorio</a>
-      </p>
+      <p class="footer-legal">Todos los derechos reservados. Claro 2026<br/><a href="#">Legal y Regulatorio</a></p>
+    </div>
+  </div>
+
+  <!-- ══════════ S5: Firma del cliente ══════════ -->
+  <div id="s5" class="screen">
+    <div class="topbar">
+      <button class="topbar-btn" onclick="closeAva()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <svg class="topbar-logo" viewBox="0 0 72 28" fill="none">
+        <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
+      </svg>
+    </div>
+
+    <div class="firma-screen-content">
+      <p class="firma-title">Firma del cliente</p>
+
+      <div class="canvas-wrapper">
+        <canvas id="signatureCanvas" height="220"></canvas>
+      </div>
+      <div class="canvas-underline"></div>
+
+      <button class="reintentar-btn" onclick="clearCanvas()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+        </svg>
+        Reintentar
+      </button>
+
+      <div class="terms-row">
+        <input type="checkbox" id="termsCheck" onchange="checkFirmaReady()"/>
+        <p class="terms-text">
+          He leído y acepto los <a href="#">Términos y Condiciones</a>, la <a href="#">Solicitud de Servicio</a>,
+          la <a href="#">Aceptación de Condiciones Particulares</a>, las <a href="#">Políticas Aplicables</a>.
+        </p>
+      </div>
+
+      <button class="btn btn-primary" id="btnFirmar" disabled onclick="onFirmarClick()">Continuar</button>
+    </div>
+  </div>
+
+  <!-- ══════════ S6: Código de Portabilidad ══════════ -->
+  <div id="s6" class="screen">
+    <div class="topbar">
+      <button class="topbar-btn" onclick="closeAva()">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <svg class="topbar-logo" viewBox="0 0 72 28" fill="none">
+        <text x="0" y="22" font-family="Roboto,sans-serif" font-size="22" font-weight="700" fill="white">Claro</text>
+      </svg>
+    </div>
+
+    <div class="otp-wrapper">
+      <!-- Ícono decorativo -->
+      <div class="otp-icon">
+        <svg width="100" height="80" viewBox="0 0 100 80" fill="none">
+          <ellipse cx="40" cy="48" rx="28" ry="22" fill="#F5F5F5"/>
+          <ellipse cx="62" cy="36" rx="22" ry="18" fill="#FFCDD2"/>
+          <rect x="20" y="34" width="40" height="28" rx="5" fill="#E0E0E0"/>
+          <rect x="26" y="42" width="8" height="8" rx="2" fill="#BDBDBD"/>
+          <rect x="38" y="42" width="8" height="8" rx="2" fill="#BDBDBD"/>
+          <rect x="50" y="42" width="8" height="8" rx="2" fill="#BDBDBD"/>
+          <circle cx="74" cy="26" r="14" fill="#E30613"/>
+          <circle cx="74" cy="26" r="10" fill="white" opacity=".15"/>
+          <polyline points="68 26 72 30 80 22" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+
+      <p class="otp-title">Código de Portabilidad</p>
+      <p class="otp-hint">Pedile al cliente el código que va a recibir<br/>por SMS en los próximos minutos.</p>
+
+      <div class="otp-inputs">
+        <input type="text" maxlength="1" inputmode="numeric" class="otp-digit" oninput="otpNext(this,0)"/>
+        <input type="text" maxlength="1" inputmode="numeric" class="otp-digit" oninput="otpNext(this,1)"/>
+        <input type="text" maxlength="1" inputmode="numeric" class="otp-digit" oninput="otpNext(this,2)"/>
+        <input type="text" maxlength="1" inputmode="numeric" class="otp-digit" oninput="otpNext(this,3)"/>
+      </div>
+
+      <button class="btn-link" onclick="">Reenviar código</button>
+    </div>
+
+    <div class="footer">
+      <button class="btn btn-primary" id="btnOtp" disabled onclick="onOtpContinuar()">Continuar</button>
+    </div>
+  </div>
+
+  <!-- ══════════ LOADING OVERLAY ══════════ -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-box">
+      <div class="spinner"></div>
+      <p class="loading-text">Firmando trámite...<br/>Esperá por favor.</p>
+    </div>
+  </div>
+
+  <!-- ══════════ MODAL: Adjuntar archivos ══════════ -->
+  <div class="modal-overlay" id="modalAdjuntar">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modalAdjuntar')">✕</button>
+      <p class="modal-title">¿Necesitás adjuntar archivos?</p>
+      <br/>
+      <button class="btn btn-primary" onclick="onAdjuntar()">Adjuntar</button>
+      <br/>
+      <button class="btn-link" onclick="onContinuarSinAdjuntar()">Continuar sin adjuntar</button>
+    </div>
+  </div>
+
+  <!-- ══════════ MODAL: Guardar código ══════════ -->
+  <div class="modal-overlay" id="modalGuardarCodigo">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal('modalGuardarCodigo')">✕</button>
+      <p class="modal-title">Guardar código</p>
+      <p class="modal-subtitle">¿Estás seguro que ingresaste los datos correctamente?</p>
+      <button class="btn btn-primary" onclick="onGuardarAceptar()">Aceptar</button>
+      <br/><br/>
+      <button class="btn-link" onclick="closeModal('modalGuardarCodigo')">Cancelar</button>
     </div>
   </div>
 
   <script>
-    var selectedTramite = '';
+    // ── Estado global ──
+    var selectedTramite  = '';
+    var isPostventa      = false;
+    var hasSignature     = false;
 
+    // ── Navegación ──
     function goTo(id) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
       window.scrollTo(0, 0);
     }
 
-    function selectTramite(el, name) {
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('visible');
+    }
+
+    // ── S1: Selección de trámite ──
+    function selectTramite(el, name, postventa) {
       document.querySelectorAll('.radio-circle').forEach(c => c.classList.remove('selected'));
       el.querySelector('.radio-circle').classList.add('selected');
       selectedTramite = name;
+      isPostventa     = postventa;
       document.getElementById('btnContinuar1').disabled = false;
     }
 
-    function goToS2() {
+    function goFromS1() {
       if (!selectedTramite) return;
-      // Actualizar títulos de pantallas de foto
-      var title = 'AVA - ' + selectedTramite;
-      document.getElementById('topbarTitleS3').textContent = title;
-      document.getElementById('topbarTitleS4').textContent = title;
-      goTo('s2');
+      if (isPostventa) {
+        // Validación de trámite postventa → ir directo a firma
+        goTo('s5');
+        initCanvas();
+      } else {
+        // Resto de trámites → flujo normal con datos + fotos
+        var title = 'AVA - ' + selectedTramite;
+        document.getElementById('titleS3').textContent = title;
+        document.getElementById('titleS4').textContent = title;
+        goTo('s2');
+      }
     }
 
-    function checkDniField() {
+    // ── S2: Datos del cliente ──
+    function checkDni() {
       var val = document.getElementById('nroDoc').value.trim();
       document.getElementById('btnContinuar2').disabled = val.length < 7;
     }
 
-    function goToS3() {
-      var val = document.getElementById('nroDoc').value.trim();
-      if (val.length < 7) return;
-      goTo('s3');
-    }
-
-    function goToS4() { goTo('s4'); }
-
+    // ── S4: fin de fotos → notifica AVA completado ──
     function finishAva() {
-      try {
-        Android.onAvaCompleted();
-      } catch(e) {
-        window.location.href = 'nexo.html';
-      }
+      try { Android.onAvaCompleted(); } catch(e) { window.location.href = 'nexo.html'; }
     }
 
+    // ── S5: Canvas de firma ──
+    var canvas, ctx, drawing = false, lastX = 0, lastY = 0;
+
+    function initCanvas() {
+      canvas = document.getElementById('signatureCanvas');
+      canvas.width = canvas.offsetWidth;
+      ctx = canvas.getContext('2d');
+      ctx.strokeStyle = '#1a1a1a';
+      ctx.lineWidth   = 2.5;
+      ctx.lineCap     = 'round';
+      ctx.lineJoin    = 'round';
+
+      // Touch
+      canvas.addEventListener('touchstart',  onTouchStart,  { passive: false });
+      canvas.addEventListener('touchmove',   onTouchMove,   { passive: false });
+      canvas.addEventListener('touchend',    onTouchEnd);
+      // Mouse (desktop / emulador)
+      canvas.addEventListener('mousedown',   onMouseDown);
+      canvas.addEventListener('mousemove',   onMouseMove);
+      canvas.addEventListener('mouseup',     onMouseUp);
+      canvas.addEventListener('mouseleave',  onMouseUp);
+    }
+
+    function getPos(e) {
+      var rect = canvas.getBoundingClientRect();
+      var src  = e.touches ? e.touches[0] : e;
+      return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+    }
+
+    function onTouchStart(e)  { e.preventDefault(); var p = getPos(e); drawing = true; lastX = p.x; lastY = p.y; ctx.beginPath(); ctx.moveTo(lastX, lastY); }
+    function onTouchMove(e)   { e.preventDefault(); if (!drawing) return; var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); lastX = p.x; lastY = p.y; hasSignature = true; checkFirmaReady(); }
+    function onTouchEnd()     { drawing = false; }
+    function onMouseDown(e)   { drawing = true; var p = getPos(e); lastX = p.x; lastY = p.y; ctx.beginPath(); ctx.moveTo(lastX, lastY); }
+    function onMouseMove(e)   { if (!drawing) return; var p = getPos(e); ctx.lineTo(p.x, p.y); ctx.stroke(); lastX = p.x; lastY = p.y; hasSignature = true; checkFirmaReady(); }
+    function onMouseUp()      { drawing = false; }
+
+    function clearCanvas() {
+      if (!canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasSignature = false;
+      checkFirmaReady();
+    }
+
+    function checkFirmaReady() {
+      var checked = document.getElementById('termsCheck').checked;
+      document.getElementById('btnFirmar').disabled = !(hasSignature && checked);
+    }
+
+    function onFirmarClick() {
+      // Mostrar loading
+      document.getElementById('loadingOverlay').classList.add('visible');
+      setTimeout(function() {
+        document.getElementById('loadingOverlay').classList.remove('visible');
+        // Mostrar modal adjuntar
+        document.getElementById('modalAdjuntar').classList.add('visible');
+      }, 2000);
+    }
+
+    function onAdjuntar() {
+      // En la versión real abriría el selector de archivos
+      closeModal('modalAdjuntar');
+      goTo('s6');
+    }
+
+    function onContinuarSinAdjuntar() {
+      closeModal('modalAdjuntar');
+      goTo('s6');
+    }
+
+    // ── S6: OTP ──
+    var otpDigits = ['','','',''];
+
+    function otpNext(input, index) {
+      otpDigits[index] = input.value;
+      // Auto-avanzar al siguiente campo
+      if (input.value && index < 3) {
+        var inputs = document.querySelectorAll('.otp-digit');
+        inputs[index + 1].focus();
+      }
+      var allFilled = otpDigits.every(function(d) { return d !== ''; });
+      document.getElementById('btnOtp').disabled = !allFilled;
+    }
+
+    function onOtpContinuar() {
+      document.getElementById('modalGuardarCodigo').classList.add('visible');
+    }
+
+    function onGuardarAceptar() {
+      closeModal('modalGuardarCodigo');
+      // Flujo finalizado — el usuario usa el back nativo para salir
+      // Opcionalmente notificamos a Android si hace falta
+      try { Android.onAvaCompleted(); } catch(e) { /* noop */ }
+    }
+
+    // ── Cerrar WebView ──
     function closeAva() {
-      try {
-        Android.onCloseWebView();
-      } catch(e) {
-        history.back();
-      }
-    }
-
-    // Expuesto para que Android pueda llamarlo y obtener el visitId si lo necesita
-    function getVisitIdFromAndroid() {
-      try {
-        return Android.getVisitId();
-      } catch(e) {
-        return '';
-      }
+      try { Android.onCloseWebView(); } catch(e) { history.back(); }
     }
   </script>
 </body>
